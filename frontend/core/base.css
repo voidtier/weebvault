@@ -389,7 +389,7 @@ main {
 .search_background {
   background: var(--blured);
   backdrop-filter: blur(15px);
-  position: absolute;
+  position: fixed;
   inset: 0;
   display: none;
   justify-content: center;
@@ -501,10 +501,14 @@ main {
   box-shadow: var(--shadow);
   border-radius: var(--border-large);
   gap: var(--gap-medium);
+  max-height: 60vh;        /* ← bounds it */
+  overflow-y: auto;        /* ← makes it scroll */
+  scrollbar-width: none;   /* ← hides scrollbar (optional) */
 }
 
 .searched_card_grid {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  overflow-y: auto;
+  grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
 }

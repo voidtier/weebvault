@@ -99,18 +99,17 @@ function search_function(query, type) {
 
   const searched_card_grid = document.querySelector(".searched_card_grid");
   searched_card_grid.innerHTML = "";
-  const observer = new IntersectionObserver((entries) => {
+const searched_content = document.querySelector(".searched_content");
 
-    if (entries[0].isIntersecting && !is_fetching) {
-      if (type === "all") {
-        search_all(query);
-      } else {
-        search_individual(type, query);
-      }
+const observer = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting && !is_fetching) {
+    if (type === "all") {
+      search_all(query);
+    } else {
+      search_individual(type, query);
     }
-
-  }, { root: searched_card_grid, threshold: 0.1 });
-
+  }
+}, { root: searched_content, threshold: 0.1 }); 
 
 
   if (observer_is_active) {

@@ -1,13 +1,13 @@
 
 
 
-function series_js() {
-  fetch_series_genre();
+function tv_js() {
+  fetch_tv_genre();
 
-  async function fetch_series_genre() {
-    const filter_series_by_genre = document.querySelector(".filter_series_by_genre");
+  async function fetch_tv_genre() {
+    const filter_tv_by_genre = document.querySelector(".filter_tv_by_genre");
     try {
-      const response = await fetch(`/api/series/genre`);
+      const response = await fetch(`/api/tv/genre`);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -22,16 +22,16 @@ function series_js() {
         genre.textContent = gen.genre_name;
         genre.dataset.genre_id = gen.genre_id;
 
-        filter_series_by_genre.appendChild(genre);
+        filter_tv_by_genre.appendChild(genre);
         genre.addEventListener("click", () => {
-          get_series_by_genre(gen.genre_id);
+          get_tv_by_genre(gen.genre_id);
         })
       })
 
 
 
     } catch (error) {
-      console.log(`error while fetching data from seriessection api of jikan : ${error}`)
+      console.log(`error while fetching data from tvsection api of jikan : ${error}`)
     }
   }
 
@@ -39,17 +39,17 @@ function series_js() {
   let next_fetch = false;
   let observer_is_active = null;
   let is_fetching = false;
-  function get_series_by_genre(genre_id) {
+  function get_tv_by_genre(genre_id) {
 
-    const series_by_genre = document.querySelector(".series_by_genre");
-    series_by_genre.innerHTML = "";
+    const tv_by_genre = document.querySelector(".tv_by_genre");
+    tv_by_genre.innerHTML = "";
     let page_number = 1;
     let current_genre = genre_id;
 
     const observer = new IntersectionObserver((entries) => {
 
       if (entries[0].isIntersecting && next_fetch && !is_fetching) {
-        fetch_series(current_genre);
+        fetch_tv(current_genre);
       }
 
 
@@ -63,15 +63,15 @@ function series_js() {
     observer_is_active = observer
 
 
-    fetch_series(genre_id)
-    async function fetch_series(genre_id) {
+    fetch_tv(genre_id)
+    async function fetch_tv(genre_id) {
 
       if (is_fetching) { return }
 
       is_fetching = true;
 
       try {
-        const response = await fetch(`/api/series/genre/${genre_id}/${page_number}`);
+        const response = await fetch(`/api/tv/genre/${genre_id}/${page_number}`);
 
 
         if (!response.ok) {
@@ -87,11 +87,11 @@ function series_js() {
 
         send_data.forEach((gen) => {
           const card = card_ui(gen);
-          series_by_genre.appendChild(card);
+          tv_by_genre.appendChild(card);
         })
 
       } catch (error) {
-        console.log(`error while fetching data from seriessection api of jikan : ${error}`)
+        console.log(`error while fetching data from tvsection api of jikan : ${error}`)
       } finally {
         is_fetching = false;
       }
@@ -134,4 +134,4 @@ function series_js() {
     return card;
   }
 }
-series_js();
+tv_js();

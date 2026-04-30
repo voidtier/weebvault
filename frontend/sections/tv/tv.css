@@ -1,4 +1,4 @@
-.series{
+.tv{
   display: flex;
   flex-direction: column;
   row-gap: 12px;
@@ -7,7 +7,7 @@
 
 
 
-.filter_series_by_genre{
+.filter_tv_by_genre{
     --header-height: 65px;
   --header-top:26px;
   --main-page-padding-top:calc(var(--header-top) + 64px);
@@ -58,7 +58,7 @@
   gap:4px;
 }
 
-.filter_series_by_genre .genre{
+.filter_tv_by_genre .genre{
 padding:2px 4px;
 background: var(--button);
 color:var(--text-subtle);
@@ -68,13 +68,13 @@ border-radius: 4px;
 transition: all 0.25s ease-in;
 }
 
-.filter_series_by_genre .genre:hover{
+.filter_tv_by_genre .genre:hover{
   background:var(--button-hovered);
   border-color: var(--border-hovered);
 }
 
 
-.series_by_genre{
+.tv_by_genre{
 background: var(--surface);
   width:100%;
   display: grid;
