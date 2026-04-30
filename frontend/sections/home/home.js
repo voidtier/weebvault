@@ -99,17 +99,17 @@ function search_function(query, type) {
 
   const searched_card_grid = document.querySelector(".searched_card_grid");
   searched_card_grid.innerHTML = "";
-const searched_content = document.querySelector(".searched_content");
+  const searched_content = document.querySelector(".searched_content");
 
-const observer = new IntersectionObserver((entries) => {
-  if (entries[0].isIntersecting && !is_fetching) {
-    if (type === "all") {
-      search_all(query);
-    } else {
-      search_individual(type, query);
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !is_fetching) {
+      if (type === "all") {
+        search_all(query);
+      } else {
+        search_individual(type, query);
+      }
     }
-  }
-}, { root: searched_content, threshold: 0.1 }); 
+  }, { root: searched_content, threshold: 0.1 });
 
 
   if (observer_is_active) {
@@ -233,10 +233,10 @@ function card_ui(content) {
   const poster = document.createElement("img");
   let srcUrl;
 
-  if (content.images) {
-    srcUrl = `${content.images.jpg.image_url}`
+  if (content.images || content.poster_path) {
+    srcUrl = `${content.images.jpg.image_url}` || `https://image.tmdb.org/t/p/original${content.poster_path}` ;
   } else {
-    srcUrl = "images/demo.png "
+    srcUrl = "images/demo.png " ;
   }
 
   title_en.textContent = content.title_english || content.title;
