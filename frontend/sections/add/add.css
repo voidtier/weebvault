@@ -1,0 +1,141 @@
+.addSection {
+  --bg: #080808;
+  --blured: rgba(0, 0, 0, 0.65);
+  --accent: #a93226;
+  --surface: #111111;
+  --surface-muted: #0d0d0d;
+  --text: #f0f0f0;
+  --text-muted: #999999;
+  --text-subtle: #555555;
+  --border: rgba(255, 255, 255, 0.07);
+  --button: #080808;
+  --closeButton: #a93226;
+  --saveButton: #1a1a1a;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --deleteToast: #a93226;
+  --addToast: #555555;
+  --note-accent: #c9843a;
+  --journal-accent: #6b8f6b;
+  --todo-accent: #4a7fa5;
+  --open-accent: #7b5ea7;
+  --surface-hovered: #1a1a1a;
+  --border-hovered: rgba(255, 255, 255, 0.13);
+  --button-hovered: #111111;
+  --progress-safe: var(--surface);
+  --progress-unsafe: var(--accent);
+  --svg-fill: #ffffff;
+  --downloadSpeed-color: #60a5fa;
+  --uploadSpeed-color: #4ade80;
+  --enourmous-font: 30px;
+  --huge-font: 24px;
+  --large-font: 18px;
+  --medium-font: 14px;
+  --small-font: 10px;
+
+  --occupied: green;
+  --unoccupied: red;
+}
+
+.otherOption {
+  font-size: var(--large-font);
+  color: var(--text-subtle);
+  text-align: center;
+  margin: 10px 0;
+}
+
+.addBySearching {
+  width: 100%;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  padding: 12px;
+}
+
+.addBySearching .titleOnSearch,
+.addBySearching .categoryOnSearch {
+  width: 100%;
+  background: transparent;
+  color: var(--text);
+  font-size: var(--medium-font);
+  padding: 8px 12px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.25s ease-in;
+}
+
+.addBySearching .titleOnSearch:focus,
+.addBySearching .categoryOnSearch:focus {
+  border-color: var(--accent);
+}
+
+.addBySearching .searchToAdd,
+.manuallyAdd {
+  width: 100%;
+  color: var(--text-subtle);
+  font-size: var(--medium-font);
+  background: var(--button);
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  transition: all 0.25s ease-in;
+}
+
+.addBySearching .searchToAdd:hover,
+.manuallyAdd:hover {
+  background: var(--button-hovered);
+  cursor: pointer;
+}
+
+.manualWrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--blured);
+  backdrop-filter: blur(10px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  inset: 0;
+}
+
+.addByManualData {
+  width: 50%;
+  background: var(--surface-hovered);
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.addByManualData input {
+  width: 100%;
+  background: transparent;
+  color: var(--text);
+  font-size: var(--medium-font);
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: all 0.25s ease-in;
+}
+
+.addByManualData input:focus {
+  border-color: var(--accent);
+}
+
+.addByManualData button {
+  width: 100%;
+  color: var(--text-subtle);
+  font-size: var(--medium-font);
+  background: var(--button);
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  transition: all 0.25s ease-in;
+}
+
+.addByManualData button:hover {
+  background: var(--button-hovered);
+  cursor: pointer;
+}

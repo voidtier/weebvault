@@ -1,0 +1,118 @@
+.series{
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  padding:10px;
+}
+
+
+
+.filter_series_by_genre{
+    --header-height: 65px;
+  --header-top:26px;
+  --main-page-padding-top:calc(var(--header-top) + 64px);
+  --aside-width: 200px;
+  --aside-full-width: 160px;
+  --aside-hidden-width: 42px;
+
+  --bg: #080808;
+  --blured: rgba(0, 0, 0, 0.65);
+  --accent: #a93226;
+  --surface: #111111;
+  --surface-muted: #0d0d0d;
+  --text: #f0f0f0;
+  --text-muted: #999999;
+  --text-subtle: #555555;
+  --border: rgba(255, 255, 255, 0.07);
+  --button: #080808;
+  --closeButton: #a93226;
+  --saveButton: #1a1a1a;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --deleteToast: #a93226;
+  --addToast: #555555;
+  --note-accent: #c9843a;
+  --journal-accent: #6b8f6b;
+  --todo-accent: #4a7fa5;
+  --open-accent: #7b5ea7;
+  --surface-hovered: #1a1a1a;
+  --border-hovered: rgba(255, 255, 255, 0.13);
+  --button-hovered: #111111;
+  --progress-safe: var(--surface);
+  --progress-unsafe: var(--accent);
+  --svg-fill: #ffffff;
+  --downloadSpeed-color: #60a5fa;
+  --uploadSpeed-color: #4ade80;
+  --enourmous-font: 30px;
+  --huge-font: 24px;
+  --large-font: 18px;
+  --medium-font: 14px;
+  --small-font: 10px;
+
+  --occupied: green;
+  --unoccupied: red;
+  width:100%;
+  background:var(--surface) ;
+  padding:10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(112px,100%), 1fr));
+  gap:4px;
+}
+
+.filter_series_by_genre .genre{
+padding:2px 4px;
+background: var(--button);
+color:var(--text-subtle);
+font-size: var(--medium-font);
+border:1px solid transparent;
+border-radius: 4px;
+transition: all 0.25s ease-in;
+}
+
+.filter_series_by_genre .genre:hover{
+  background:var(--button-hovered);
+  border-color: var(--border-hovered);
+}
+
+
+.series_by_genre{
+background: var(--surface);
+  width:100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px,100%), 1fr));
+  gap:12px;
+}
+
+
+.card{
+  width:200px;
+  aspect-ratio: 2/3;
+  background: var(--surface-muted);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card img{
+  width:100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card .card_info{
+  position: absolute;
+  inset: 0;
+  background: var(--blured);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+ justify-content: flex-end;
+  row-gap: 4px;
+  padding:4px;
+  opacity: 0;
+  transition: all 0.25s ease-in;
+}
+
+
+.card:hover .card_info{
+  opacity: 1;
+}

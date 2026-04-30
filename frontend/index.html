@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="core/base.css" />
+  <title>WeebVault - a vault all a weeb needs</title>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li class="tab headerNavLink home" data-tab="Home">Home</li>
+        <li class=" search_li">
+          <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
+            class="search_icon" fill="#ffffff">
+            <path
+              d="M765-144 526-383q-30 22-65.79 34.5-35.79 12.5-76.18 12.5Q284-336 214-406t-70-170q0-100 70-170t170-70q100 0 170 70t70 170.03q0 40.39-12.5 76.18Q599-464 577-434l239 239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Z" />
+          </svg>
+        </li>
+        <li class="tab headerNavLink" data-tab="Anime">Anime</li>
+        <li class="tab headerNavLink" data-tab="Manga">Manga</li>
+        <li class="tab headerNavLink" data-tab="Movies">Movies</li>
+        <li class="tab headerNavLink" data-tab="Series">Series</li>
+        <li class=" avatarWrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" class="avatar">
+            <path
+              d="M237-285q54-38 115.5-56.5T480-360q66 0 127.5 18.5T723-285q35-41 52-91t17-104q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 54 17 104t52 91Zm141-165q-42-42-42-102t42-102q42-42 102-42t102 42q42 42 42 102t-42 102q-42 42-102 42t-102-42ZM480-96q-79 0-149-30t-122.5-82.5Q156-261 126-331T96-480q0-80 30-149.5t82.5-122Q261-804 331-834t149-30q80 0 149.5 30t122 82.5Q804-699 834-629.5T864-480q0 79-30 149t-82.5 122.5Q699-156 629.5-126T480-96Zm100-88.5q48-16.5 90-48.5-43-27-91-41t-99-14q-51 0-99.5 13.5T290-233q42 32 90 48.5T480-168q52 0 100-16.5ZM531-501q21-21 21-51t-21-51q-21-21-51-21t-51 21q-21 21-21 51t21 51q21 21 51 21t51-21Zm-51-51Zm0 319Z" />
+          </svg>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="landing-bg" id="landing-bg"></div>
+    <section class="mainPage" id="mainPage"></section>
+  </main>
+  <footer></footer>
+
+  <dialog class="avatarModal">
+    <div class="avatarModalWrapper">
+      <p class="accountName avatarModalDirectChild">Khabir</p>
+
+      <div class="sessionInfo avatarModalDirectChild">
+        <p class="sessionInfoSignal"></p>
+
+        <p class="sessionInfoText">Logged in</p>
+      </div>
+
+      <div class="themeToggler avatarModalDirectChild">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
+          class="theme actionIcon avatarModalButton">
+          <path
+            d="M479.96-144Q340-144 242-242t-98-238q0-140 97.93-238t237.83-98q13.06 0 25.65 1 12.59 1 25.59 3-39 29-62 72t-23 92q0 85 58.5 143.5T648-446q49 0 92-23t72-62q2 13 3 25.59t1 25.65q0 139.9-98.04 237.83t-238 97.93Zm.04-72q82 0 148.78-47.07Q695.55-310.15 727-386q-20 5-39.67 8.5Q667.67-374 648-374q-113.86 0-193.93-80.07Q374-534.14 374-648q0-19.67 3.5-39.33Q381-707 386-727q-75.85 31.45-122.93 98.22Q216-562 216-480q0 110 77 187t187 77Zm-14-250Z" />
+        </svg>
+
+        <p class="themeName avatarModalTextButton">Dark</p>
+      </div>
+
+      <div class="sessionActivity avatarModalDirectChild">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
+          class="logOutIcon actionIcon logMeOut avatarModalButton">
+          <path
+            d="M216-144q-29.7 0-50.85-21.15Q144-186.3 144-216v-528q0-29.7 21.15-50.85Q186.3-816 216-816h264v72H216v528h264v72H216Zm432-168-51-51 81-81H384v-72h294l-81-81 51-51 168 168-168 168Z" />
+        </svg>
+        <p class="logOutText avatarModalTextButton">Log out</p>
+      </div>
+    </div>
+  </dialog>
+
+
+  <div class="search_background">
+    <div class="search_wrapper">
+
+      <div class="search_items">
+        <div class="selection_close"><select name="" id="category_selection" class="category_selection">
+            <option value="default" disabled selected hidden>All</option>
+            <option value="All">All</option>
+            <option value="Anime">Anime</option>
+            <option value="Manga">Manga</option>
+            <option value="Movies">Movies</option>
+            <option value="Tv">Tv-shows</option>
+          </select>
+
+          <button class="close_search" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#ffffff">
+              <path
+                d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="search_bar_container">
+          <input type="search" class="search_bar" id="search_bar" placeholder="Search Anime, Manga, shows…">
+
+          <button class="search_button" id="search_button">Search</button>
+        </div>
+      </div>
+
+
+
+      <div class="searched_content">
+        <div class="searched_card_grid"></div>
+        <div class="searched_observer_bar" style="height: 10px;"></div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  <script src="core/base.js"></script>
+  <script src="core/section.js"></script>
+</body>
+
+</html>

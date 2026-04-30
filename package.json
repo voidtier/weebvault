@@ -1,0 +1,29 @@
+{
+  "name": "weebvault",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/voidtier/weebvault#readme",
+  "bugs": {
+    "url": "https://github.com/voidtier/weebvault/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voidtier/weebvault.git"
+  },
+  "license": "ISC",
+  "author": "voidtier",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.5.0"
+  }
+}
