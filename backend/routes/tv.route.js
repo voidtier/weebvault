@@ -4,14 +4,14 @@ const authentify = require("../middlewares/authentication.middleware.js");
 const { tmdb_base_url } = require("../config/api.js");
 
 router.get("/genre", authentify, async function (req, res) {
-
-  const manga_genre_url = `${tmdb_base_url}/genre/tv/list?api_key=${process.env.TMDB_API_KEY}`
+  const manga_genre_url = `${tmdb_base_url}/genre/tv/list?api_key=${process.env.TMDB_API_KEY}`;
   try {
-
     const response = await fetch(manga_genre_url);
 
     if (!response.ok) {
-      return res.status(response.status).json({ message: "External API Error" });
+      return res
+        .status(response.status)
+        .json({ message: "External API Error" });
     }
 
     const { genres } = await response.json();
@@ -19,67 +19,72 @@ router.get("/genre", authentify, async function (req, res) {
     const send_data = genres.map((gen) => {
       return {
         genre_name: gen.name,
-        genre_id: gen.id
+        genre_id: gen.id,
       };
-    })
-
-    res.json(send_data);
-
-
-  } catch (error) {
-    console.log(`error while fetching data from series_route_genre_list server side : ${error}`);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-})
-
-
-router.get("/genre/:genre_id/:page_number", authentify, async function (req, res) {
-  try {
-    const genre_id = req.params.genre_id;
-    const page_number = req.params.page_number;
-    const manga_genre_url = `${tmdb_base_url}/discover/tv?api_key=${process.env.TMDB_API_KEY}&with_genres=${genre_id}&page=${page_number}`
-    const response = await fetch(manga_genre_url);
-
-    if (!response.ok) {
-      return res.status(response.status).json({ message: "External API Error" });
-    }
-
-    const data = await response.json();
-    const has_page = data.page < data.total_pages;
-
-    const send_data = data.results.map((gen) => {
-      return {
-        name: gen.name,
-        type: gen.type,
-        first_air_date: gen.first_air_date,
-        poster_path: gen.poster_path
-      };
-    })
-
-    res.json({
-      has_page, send_data
     });
 
-
+    res.json(send_data);
   } catch (error) {
-    console.log(`error while fetching data from series_route_genre server side : ${error}`);
+    console.log(
+      `error while fetching data from series_route_genre_list server side : ${error}`,
+    );
     res.status(500).json({ error: "Internal Server Error" });
   }
-})
+});
 
+router.get(
+  "/genre/:genre_id/:page_number",
+  authentify,
+  async function (req, res) {
+    try {
+      const genre_id = req.params.genre_id;
+      const page_number = req.params.page_number;
+      const manga_genre_url = `${tmdb_base_url}/discover/tv?api_key=${process.env.TMDB_API_KEY}&with_genres=${genre_id}&page=${page_number}`;
+      const response = await fetch(manga_genre_url);
 
+      if (!response.ok) {
+        return res
+          .status(response.status)
+          .json({ message: "External API Error" });
+      }
+
+      const data = await response.json();
+      const has_page = data.page < data.total_pages;
+
+      const send_data = data.results.map((gen) => {
+        return {
+          name: gen.title_en || gen.title.english || gen.title || gen.name,
+          type: gen.type,
+          first_air_date: gen.first_air_date,
+          poster_path: gen.poster_path,
+        };
+      });
+
+      res.json({
+        has_page,
+        send_data,
+      });
+    } catch (error) {
+      console.log(
+        `error while fetching data from series_route_genre server side : ${error}`,
+      );
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
+);
 
 router.get("/:query/:page_number", authentify, async function (req, res) {
-
   try {
     const query = req.params.query;
     const type = "tv";
     const page_number = req.params.page_number;
-    const tv_url = `${tmdb_base_url}/search/tv?api_key=${process.env.TMDB_API_KEY}&query=${query}&page=${page_number}`
+    const tv_url = `${tmdb_base_url}/search/tv?api_key=${process.env.TMDB_API_KEY}&query=${query}&page=${page_number}`;
     const response = await fetch(tv_url);
 
     if (!response.ok) {
-      return res.status(response.status).json({ message: "External API Error" });
+      return res
+        .status(response.status)
+        .json({ message: "External API Error" });
     }
 
     const data = await response.json();
@@ -87,23 +92,24 @@ router.get("/:query/:page_number", authentify, async function (req, res) {
 
     const send_data = data.results.map((gen) => {
       return {
-        title_en: gen.title,
-        type: "movie",
-        release_date: gen.release_date,
-        poster_path: gen.poster_path
+        name: gen.title_en || gen.title.english || gen.title || gen.name,
+        type: gen.type,
+        first_air_date: gen.first_air_date,
+        poster_path: gen.poster_path,
       };
-    })
-
-    res.json({
-      has_page, send_data, type
     });
 
-
+    res.json({
+      has_page,
+      send_data,
+      type,
+    });
   } catch (error) {
-    console.log(`error while fetching data from tv_route_search server side : ${error}`);
+    console.log(
+      `error while fetching data from tv_route_search server side : ${error}`,
+    );
     res.status(500).json({ error: "Internal Server Error" });
   }
-})
-
+});
 
 module.exports = router;

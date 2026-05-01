@@ -227,7 +227,11 @@ function home_js() {
       srcUrl = "images/demo.png ";
     }
 
-    title_en.textContent = content.title_english || content.title;
+    title_en.textContent =
+      content.title_en ||
+      content.title_english ||
+      content.title ||
+      content.name;
     type.textContent = content.type;
     status.textContent = content.status;
 
