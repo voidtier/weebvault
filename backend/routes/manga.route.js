@@ -50,7 +50,7 @@ router.get("/genre/:genre_id/:page_number", authentify, async function (req, res
 
     const send_data = data.map((gen) => {
       return {
-        title_en: gen.title_english,
+        title_en: gen.title_en,
         type: gen.type,
         status: gen.status,
         images: gen.images
@@ -87,7 +87,7 @@ router.get("/:query/:page_number", authentify, async function (req, res) {
 
     const send_data = data.map((gen) => {
       return {
-        title_en: gen.title_english,
+        title_en: gen.title_en,
         type: gen.type,
         status: gen.status,
         images: gen.images

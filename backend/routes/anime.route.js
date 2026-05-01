@@ -50,7 +50,7 @@ router.get("/genre/:genre_id/:page_number", authentify, async function (req, res
 
     const send_data = data.map((gen) => {
       return {
-        title_en: gen.title_english,
+        title_en: gen.title_en,
         type: gen.type,
         status: gen.status,
         images: gen.images
@@ -67,8 +67,6 @@ router.get("/genre/:genre_id/:page_number", authentify, async function (req, res
     res.status(500).json({ error: "Internal Server Error" });
   }
 })
-
-
 
 
 router.get("/:query/:page_number", authentify, async function (req, res) {
@@ -89,7 +87,7 @@ router.get("/:query/:page_number", authentify, async function (req, res) {
 
     const send_data = data.map((gen) => {
       return {
-        title_en: gen.title_english,
+        title_en: gen.title_en,
         type: gen.type,
         status: gen.status,
         images: gen.images

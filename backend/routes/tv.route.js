@@ -50,7 +50,7 @@ router.get("/genre/:genre_id/:page_number", authentify, async function (req, res
     const send_data = data.results.map((gen) => {
       return {
         name: gen.name,
-        type: "series",
+        type: gen.type,
         first_air_date: gen.first_air_date,
         poster_path: gen.poster_path
       };

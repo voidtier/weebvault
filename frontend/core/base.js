@@ -21,7 +21,7 @@ avatarModalSetup();
 
 function themeChanger() {
   const theme = document.querySelector(".theme");
-  const themeName = document.querySelector(".themeName");
+  const theme_state = document.querySelector(".theme_state");
   const themePath = document.querySelector(".theme path");
 
   const themeInfo = localStorage.getItem("userTheme") || "dark";
@@ -40,16 +40,16 @@ function themeChanger() {
     document.documentElement.classList.remove("dark", "light");
     document.documentElement.classList.add(themeKey);
     themePath.setAttribute("d", imageIcons[themeKey].themeIcon);
-    themeName.textContent = themeKey;
+    theme_state.textContent = themeKey;
     localStorage.setItem("userTheme", themeKey);
   }
 }
 
 function avatarModalSetup() {
   const avatarWrapper = document.querySelector(".avatarWrapper");
-  const avatarModal = document.querySelector(".avatarModal");
-  const accountName = document.querySelector(".accountName");
-  const sessionInfo = document.querySelector(".sessionInfo");
+  const avatar_modal = document.querySelector(".avatar_modal");
+  const account_name = document.querySelector(".account_name");
+  const user_session_wrapper = document.querySelector(".user_session_wrapper");
   const logMeOut = document.querySelector(".logMeOut");
 
   avatarModalGetUserInfo();
@@ -57,19 +57,19 @@ function avatarModalSetup() {
   avatarWrapper.addEventListener("click", (e) => {
     e.stopPropagation();
 
-    if (avatarModal.open) {
-      avatarModal.close();
+    if (avatar_modal.open) {
+      avatar_modal.close();
     } else {
       const positioning = avatarWrapper.getBoundingClientRect();
-      avatarModal.style.top = `${positioning.bottom + 16}px`;
-      avatarModal.style.left = `${positioning.left - 120}px`;
-      avatarModal.show();
+      avatar_modal.style.top = `${positioning.bottom + 16}px`;
+      avatar_modal.style.left = `${positioning.left - 120}px`;
+      avatar_modal.show();
     }
   });
 
   async function avatarModalGetUserInfo() {
-    const accountName = document.querySelector(".accountName");
-    const sessionInfoText = document.querySelector(".sessionInfoText");
+    const account_name = document.querySelector(".account_name");
+    const user_session_text = document.querySelector(".user_session_text");
 
     try {
       const responseDataJson = await fetch("/user");
@@ -79,8 +79,8 @@ function avatarModalSetup() {
       }
 
       const responseData = await responseDataJson.json();
-      accountName.textContent = responseData.username;
-      sessionInfoText.textContent = "Logged in";
+      account_name.textContent = responseData.username;
+      user_session_text.textContent = "Logged in";
       // console.log(` user data : ${responseData}`);
     } catch (error) {
       console.log(`couldn't fetch userdata : ${error}`);
@@ -93,10 +93,10 @@ function avatarModalSetup() {
 
   window.addEventListener("click", (e) => {
     const wrapperNeedToClose = avatarWrapper.contains(e.target);
-    const ModalNeedToClose = avatarModal.contains(e.target);
+    const ModalNeedToClose = avatar_modal.contains(e.target);
 
     if (!wrapperNeedToClose && !ModalNeedToClose) {
-      avatarModal.close();
+      avatar_modal.close();
     }
   });
 }
@@ -106,7 +106,7 @@ search_toggle();
 function search_toggle() {
   const search_li = document.querySelector(".search_li");
   const search_background = document.querySelector(".search_background");
-  const close_search = document.querySelector(".close_search");
+  const search_close_button = document.querySelector(".search_close_button");
 
   search_li.addEventListener("click", (e) => {
     e.preventDefault();
@@ -114,13 +114,12 @@ function search_toggle() {
     document.body.classList.add("modal_opened");
   });
 
-  close_search.addEventListener("click", () => {
+  search_close_button.addEventListener("click", () => {
     search_background.classList.remove("show");
     document.body.classList.remove("modal_opened");
-
   });
 
-  window.addEventListener('keydown', (e) => {
+  window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       search_background.classList.remove("show");
       document.body.classList.remove("modal_opened");

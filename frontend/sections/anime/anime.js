@@ -80,6 +80,9 @@ function anime_js() {
 
         const { has_page, send_data } = await response.json();
 
+        console.log(send_data);
+        
+
         if (has_page) {
           next_fetch = has_page
           page_number++

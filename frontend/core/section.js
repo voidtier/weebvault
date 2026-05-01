@@ -20,7 +20,7 @@ function sectionRoute() {
       window.history.pushState(
         { section: sectionName },
         "",
-        sectionName === "system" ? "/" : `/${sectionName}`,
+        sectionName === "home" ? "/" : `/${sectionName}`,
       );
 
       setCss(sectionName);
@@ -32,12 +32,10 @@ function sectionRoute() {
   }
 
   document.querySelectorAll(".tab").forEach((tab) => {
-
     tab.addEventListener("click", () => {
-
-      const landing_bg = document.getElementById("landing-bg");
-      landing_bg.classList.remove('active');
-      landing_bg.style.backgroundImage = '';
+      const landing_bg = document.getElementById("landing_page");
+      landing_bg.classList.remove("active");
+      landing_bg.style.backgroundImage = "";
 
       const sectionName = tab.dataset.tab.trim().toLowerCase();
       document

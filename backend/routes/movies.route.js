@@ -14,7 +14,7 @@ router.get("/genre", authentify, async function (req, res) {
       return res.status(response.status).json({ message: "External API Error" });
     }
 
-    const {genres} = await response.json();
+    const { genres } = await response.json();
 
     const send_data = genres.map((gen) => {
       return {
@@ -49,7 +49,7 @@ router.get("/genre/:genre_id/:page_number", authentify, async function (req, res
 
     const send_data = data.results.map((gen) => {
       return {
-        title_en: gen.title,
+        title_en: gen.title_en,
         type: "movie",
         release_date: gen.release_date,
         poster_path: gen.poster_path
@@ -86,8 +86,8 @@ router.get("/:query/:page_number", authentify, async function (req, res) {
 
     const send_data = data.results.map((gen) => {
       return {
-        title_en: gen.title,
-        type: "movie",
+        title_en: gen.title_en,
+        type: gen.type,
         release_date: gen.release_date,
         poster_path: gen.poster_path
       };
