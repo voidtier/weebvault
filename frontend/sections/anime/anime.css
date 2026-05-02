@@ -5,7 +5,92 @@
   padding: 10px;
 }
 
+.carousel_section {
+  width: 100%;
+}
+.carousel_wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carousel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0.5rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollButton {
+  position: absolute;
+  z-index: 10;
+  /* width: 48px; */
+  padding: 0 10px;
+  height: 80%;
+  border-radius: 10px;
+  background: var(--blured);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.2s,
+    transform 0.25s;
+}
+
+.leftArrow {
+  left: -1.5rem;
+  left: 10px;
+}
+
+.rightArrow {
+  right: -1.5rem;
+  right: 10px;
+}
+
+.card {
+  /* width:200px; */
+  width: 100%;
+  aspect-ratio: 2/3;
+  background: var(--surface-muted);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  scroll-snap-align: center;
+  flex-shrink: 0;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card .cardInfo {
+  position: absolute;
+  inset: 0;
+  background: var(--blured);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  row-gap: 4px;
+  padding: 4px;
+  opacity: 0;
+  transition: all 0.25s ease-in;
+}
+
+.card:hover .cardInfo {
+  opacity: 1;
+}
 
 .filter_anime_by_genre {
   --header-height: 65px;
@@ -73,7 +158,6 @@
   border-color: var(--border-hovered);
 }
 
-
 .anime_by_genre {
   background: var(--surface);
   width: 100%;
@@ -81,7 +165,6 @@
   grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
   gap: 12px;
 }
-
 
 .card {
   width: 200px;
@@ -113,11 +196,9 @@
   transition: all 0.25s ease-in;
 }
 
-
 .card:hover .card_overlay {
   opacity: 1;
 }
-
 
 /* .card_modal{
   display: none;
@@ -153,34 +234,31 @@
   }
 }
 
-.card_modal_wrapper{
-  display:flex;
+.card_modal_wrapper {
+  display: flex;
   flex-direction: column;
   row-gap: 12px;
-  padding:10px;
-  background:var(--surface-hovered);
+  padding: 10px;
+  background: var(--surface-hovered);
 }
 
-.more_buttons_wrapper{
+.more_buttons_wrapper {
   display: flex;
   column-gap: 10px;
 }
 
-.more_buttons_wrapper button{
-  background:var(--button);
-  border:1px solid transparent;
+.more_buttons_wrapper button {
+  background: var(--button);
+  border: 1px solid transparent;
   border-radius: 10px;
-  padding:4px 8px;
+  padding: 4px 8px;
   transition: all 0.25s ease-in;
 }
 
-.more_buttons_wrapper button:hover{
+.more_buttons_wrapper button:hover {
   border-color: var(--border);
-  background:var(--button-hovered);
+  background: var(--button-hovered);
 }
-
-
-
 
 /* The button that triggers the info */
 .more_button {
@@ -193,7 +271,7 @@
   position-anchor: --more-btn;
   top: anchor(bottom);
   left: anchor(left);
-  
+
   /* Reset default popover styles */
   margin: 0;
   position: absolute;

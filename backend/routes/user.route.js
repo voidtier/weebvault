@@ -110,10 +110,10 @@ router.get("/anime", authentify, function (req, res) {
 router.get("/manga", authentify, function (req, res) {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
-router.get("/movie", authentify, function (req, res) {
+router.get("/movies", authentify, function (req, res) {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
-router.get("/series", authentify, function (req, res) {
+router.get("/tv", authentify, function (req, res) {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
 

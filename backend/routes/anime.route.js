@@ -112,4 +112,39 @@ router.get("/:query/:page_number", authentify, async function (req, res) {
   }
 });
 
+router.get("/top", authentify, async function (req, res) {
+  try {
+    const anime_url = `${jikan_base_url}/top/anime`;
+    const response = await fetch(anime_url);
+
+    if (!response.ok) {
+      return res
+        .status(response.status)
+        .json({ message: "External API Error" });
+    }
+
+    const { data, pagination } = await response.json();
+    const has_page = pagination.has_next_page || false;
+
+    const send_data = data.map((gen) => {
+      return {
+        title_en: gen.title_en || gen.title.english || gen.title || gen.name,
+        type: gen.type,
+        status: gen.status,
+        images: gen.images,
+      };
+    });
+
+    res.json({
+      has_page,
+      send_data,
+    });
+  } catch (error) {
+    console.log(
+      `error while fetching data from anime_route_search server side : ${error}`,
+    );
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 module.exports = router;

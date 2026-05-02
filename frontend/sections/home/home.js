@@ -1,7 +1,7 @@
 home_js();
 
 function home_js() {
-  heroPageBanner();
+  // heroPageBanner();
 
   async function heroPageBanner() {
     const landing_page = document.getElementById("landing_page");
