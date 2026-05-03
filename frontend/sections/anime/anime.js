@@ -1,10 +1,47 @@
 function anime_js() {
   fetch_anime_genre();
-  fetch_top_anime();
+  // fetch_top_anime();
+  //
+  //
+  // heroPageBanner();
+  async function heroPageBanner() {
+    const anime_landing_image = document.querySelector("anime_landing_image");
+    const status_text = document.querySelector("status_text");
+    const title = document.querySelector(".anime_landing_info .title");
+    const rating_number = document.querySelector(
+      ".anime_landing_info .info_stat .rating .rating_number",
+    );
+    const fav_number = document.querySelector(
+      ".anime_landing_info .info_stat .fav .fav_number",
+    );
+    const episode_number = document.querySelector(
+      ".anime_landing_info .info_stat .episode .episode_number",
+    );
+
+    try {
+      const response = await fetch(`/api/anime/trending`);
+
+      console.log(response.status);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const { send_data } = await response.json();
+      const randomIndex = Math.floor(Math.random() * send_data.length);
+
+      anime_landing_image.src =
+        send_data[randomIndex].images.jpg.large_image_url;
+    } catch (error) {
+      console.log(
+        `error while fetching data from animetrending api of jikan : ${error}`,
+      );
+    }
+  }
 
   async function fetch_anime_genre() {
-    const filter_anime_by_genre = document.querySelector(
-      ".filter_anime_by_genre",
+    const genre_category_wrapper = document.querySelector(
+      ".genre_category_wrapper",
     );
     try {
       const response = await fetch(`/api/anime/genre`);
@@ -16,16 +53,15 @@ function anime_js() {
       const data = await response.json();
 
       data.forEach((gen) => {
-        const genre = document.createElement("button");
+        const genre = document.createElement("p");
         genre.className = `genre`;
-        genre.type = "button";
         genre.textContent = gen.genre_name;
         genre.dataset.genre_id = gen.genre_id;
 
-        filter_anime_by_genre.appendChild(genre);
-        genre.addEventListener("click", () => {
-          get_anime_by_genre(gen.genre_id);
-        });
+        genre_category_wrapper.appendChild(genre);
+        // genre.addEventListener("click", () => {
+        //   get_anime_by_genre(gen.genre_id);
+        // });
       });
     } catch (error) {
       console.log(
