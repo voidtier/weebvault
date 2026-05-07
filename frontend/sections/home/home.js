@@ -1,4 +1,4 @@
-home_js();
+// home_js();
 
 function home_js() {
   // heroPageBanner();
