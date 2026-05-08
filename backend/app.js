@@ -5,7 +5,7 @@ const sectionsRouter = require("./routes/sections.route.js");
 // const addRouter = require("./routes/add.route.js");
 const animeRouter = require("./routes/anime.route.js");
 const mangaRouter = require("./routes/manga.route.js");
-const moviesRouter = require("./routes/movies.route.js");
+const movieRouter = require("./routes/movie.route.js");
 const tvRouter = require("./routes/tv.route.js");
 const path = require("path");
 
@@ -18,7 +18,7 @@ app.use("/api", sectionsRouter);
 // app.use("/api/add", addRouter);
 app.use("/api/anime", animeRouter);
 app.use("/api/manga", mangaRouter);
-app.use("/api/movies", moviesRouter);
+app.use("/api/movie", movieRouter);
 app.use("/api/tv", tvRouter);
 app.use(express.static(path.join(__dirname, "../frontend")));
 

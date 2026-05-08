@@ -361,6 +361,7 @@
 .genre_opener:hover {
   background: var(--button-hovered);
   border-color: var(--border);
+  cursor: pointer;
 }
 
 .anime_preview_wrapper {

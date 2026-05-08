@@ -1,7 +1,7 @@
 function anime_js() {
+  strongest_anime_fetch();
   // fetch_anime_genre();
 
-  strongest_anime_fetch();
   async function strongest_anime_fetch() {
     const strongest_anime_image = document.querySelector(
       ".strongest_anime_image",

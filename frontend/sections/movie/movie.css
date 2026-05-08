@@ -1,4 +1,4 @@
-.manga {
+.movie {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -59,27 +59,27 @@
   --unoccupied: red;
 }
 
-.manga_page {
+.movie_page {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.manga_page_landing {
+.movie_page_landing {
   width: 100%;
   min-height: 45vh;
   display: flex;
   border-bottom: 1px solid var(--accent);
 }
 
-.strongest_manga_wrapper {
+.strongest_movie_wrapper {
   width: 60%;
   display: flex;
   align-items: center;
   border-right: 1px solid var(--accent);
 }
 
-.strongest_manga_image_wrapper {
+.strongest_movie_image_wrapper {
   width: max-content;
   height: 320px;
   background: skyblue;
@@ -92,18 +92,18 @@
   transition: all 0.25s ease-in;
 }
 
-.strongest_manga_image_wrapper:hover {
+.strongest_movie_image_wrapper:hover {
   /*transform: rotate(0deg);*/
   animation: shake 2.5s ease-in-out forwards;
 }
 
-.strongest_manga_image {
+.strongest_movie_image {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.strongest_manga_details {
+.strongest_movie_details {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -140,12 +140,14 @@
 }
 
 .status_signal {
-  width: 8px;
+  /*width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--occupied);
   box-shadow: 0 0 10px var(--occupied);
-  animation: blink 1.5s ease-in-out infinite;
+  animation: blink 1.5s ease-in-out infinite;*/
+  font-size: var(--font-small);
+  color: var(--text-subtle);
 }
 
 .status {
@@ -175,7 +177,7 @@
   color: var(--text-subtle);
 }
 
-.strongest_manga_stats {
+.strongest_movie_stats {
   width: max-content;
   display: flex;
   border: 1px solid var(--border);
@@ -191,7 +193,7 @@
   padding: var(--padding-large) var(--padding-enourmous);
 }
 
-.strongest_manga_stats div:nth-child(2) {
+.strongest_movie_stats div:nth-child(2) {
   border-left: 1px solid var(--border);
   border-right: 1px solid var(--border);
 }
@@ -210,32 +212,32 @@
   color: var(--accent);
 }
 
-.ranked_manga_wrapper {
+.ranked_movie_wrapper {
   width: 40%;
   display: flex;
   flex-direction: column;
   /*align-items: center;*/
 }
 
-.ranked_manga_list_title_wrapper {
+.ranked_movie_list_title_wrapper {
   padding: var(--padding-enourmous);
   padding-left: var(--padding-huge);
   border-bottom: 1px solid var(--border);
 }
 
-.ranked_manga_list_title {
+.ranked_movie_list_title {
   font-size: var(--font-medium);
   color: var(--text-subtle);
 }
 
-.ranked_manga_list {
+.ranked_movie_list {
   max-height: 45vh;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
 }
 
-.ranked_manga {
+.ranked_movie {
   width: 100%;
   background: transparent;
   display: flex;
@@ -245,25 +247,25 @@
   transition: all 0.25s ease-in;
 }
 
-.ranked_manga_wrapper div:nth-last-child {
+.ranked_movie_wrapper div:nth-last-child {
   border: none;
 }
 
-.ranked_manga:hover {
+.ranked_movie:hover {
   background: var(--surface-hovered);
 }
 
-.ranked_manga_rank_wrapper {
+.ranked_movie_rank_wrapper {
   line-height: 1;
 }
 
-.ranked_manga_rank {
+.ranked_movie_rank {
   font-size: 4rem;
   color: var(--accent);
   opacity: 0.75;
 }
 
-.ranked_manga_image_wrapper {
+.ranked_movie_image_wrapper {
   height: 160px;
   border-radius: var(--border-large);
   overflow: hidden;
@@ -273,35 +275,35 @@
   flex-shrink: 0;
 }
 
-.ranked_manga_image {
+.ranked_movie_image {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.ranked_manga_info {
+.ranked_movie_info {
   margin: 0 10px;
 }
 
-.ranked_manga_title {
+.ranked_movie_title {
   font-size: var(--font-large);
   color: var(--text-muted);
 }
 
-.ranked_manga_details {
+.ranked_movie_details {
   display: flex;
 }
 
-.ranked_manga_type,
-.ranked_manga_status,
-.ranked_manga_fav {
+.ranked_movie_type,
+.ranked_movie_status,
+.ranked_movie_fav {
   font-size: var(--font-small);
   color: var(--text-subtle);
   padding: var(--padding-medium);
   border-right: 1px solid var(--accent);
 }
 
-.ranked_manga_score_wrapper {
+.ranked_movie_score_wrapper {
   margin-left: auto;
   margin-right: 10px;
   padding: var(--padding-enourmous) var(--padding-large);
@@ -310,18 +312,18 @@
   border-radius: var(--border-large);
 }
 
-.ranked_manga_score {
+.ranked_movie_score {
   font-size: var(--font-large);
   color: var(--accent);
 }
 
-.manga_page_rest {
+.movie_page_rest {
   height: 95vh;
   width: 100%;
   display: flex;
 }
 
-.manga_filtering_sidebar {
+.movie_filtering_sidebar {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -329,23 +331,23 @@
   border-right: 1px solid var(--accent);
 }
 
-.manga_filtering_special_category_wrapper {
+.movie_filtering_special_category_wrapper {
   margin: 20px 0px;
   border-top: 1px solid var(--border);
 }
 
-.manga_filtering_special_category {
+.movie_filtering_special_category {
   padding: var(--padding-medium);
   border-bottom: 1px solid var(--border);
   transition: all 0.25s ease-in;
 }
 
-.manga_filtering_special_category:hover {
+.movie_filtering_special_category:hover {
   background: var(--surface-hovered);
   cursor: pointer;
 }
 
-.manga_filtering_genre_category_wrapper {
+.movie_filtering_genre_category_wrapper {
   margin: 20px 10px;
 }
 
@@ -364,30 +366,30 @@
   cursor: pointer;
 }
 
-.manga_preview_wrapper {
+.movie_preview_wrapper {
   flex: 9;
   display: flex;
   flex-direction: column;
 }
 
-.manga_preview_filters_wrapper {
+.movie_preview_filters_wrapper {
   display: flex;
   border: 1px solid var(--border);
 }
 
-.manga_preview_filter {
+.movie_preview_filter {
   padding: var(--padding-medium);
   border: 1px solid var(--border);
   border-radius: var(--border-medium);
   margin: 10px 5px;
 }
 
-.manga_preview_grid_wrapper {
+.movie_preview_grid_wrapper {
   height: 90vh;
   overflow-y: auto;
 }
 
-.manga_preview_grid {
+.movie_preview_grid {
   padding: var(--padding-enourmous);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
@@ -396,6 +398,7 @@
 .card {
   /*aspect-ratio: 2/3;*/
   /*min-width: 200px;*/
+  max-height: 300px;
   margin: 10px;
   border-radius: var(--border-large);
   overflow: hidden;
