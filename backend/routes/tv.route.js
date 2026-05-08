@@ -41,8 +41,7 @@ router.get(
   async function (req, res) {
     try {
       const { genre_id, page_number } = req.params;
-      const url = `${tmdb_base_url}/discover/tv?api_key=${process.env.TMDB_API_KEY}&with_genres=${genre_id}&page=
- ${page_number}`;
+      const url = `${tmdb_base_url}/discover/tv?api_key=${process.env.TMDB_API_KEY}&with_genres=${genre_id}&page=${page_number}`;
 
       const response = await fetch(url);
       if (!response.ok)

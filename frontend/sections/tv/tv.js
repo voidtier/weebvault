@@ -1,6 +1,6 @@
 function tv_js() {
   strongest_tv_fetch();
-  // fetch_tv_genre();
+  genreDrawer();
 
   async function strongest_tv_fetch() {
     const strongest_tv_image = document.querySelector(".strongest_tv_image");
@@ -156,35 +156,107 @@ function tv_js() {
     return num.toString();
   }
 
-  async function fetch_tv_genre() {
-    const genre_list = document.querySelector(".genre_list");
-    genre_list.innerHTML = "";
-    try {
-      const response = await fetch(`/api/tv/genre`);
+  function genreDrawer() {
+    const genreOpener = document.querySelector(".genre_opener");
+    const genre_displayer = document.querySelector(".genre_displayer");
+    if (!genreOpener) return;
+    // Create drawer HTML dynamically
+    const drawerHTML = `
+      <div class="genre_drawer_overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:3000;"></div>
+      <div class="genre_drawer" style="position:fixed; right:-400px; top:0; width:380px; height:100vh; background:var(--surface); z-index:3001; transition:right 0.3s ease; overflow-y:auto; padding:20px; box-shadow:var(--shadow);">
+        <div class="genre_drawer_header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding-bottom:15px; border-bottom:1px solid var(--border);">
+          <h3 style="color:var(--text-muted); font-size:18px;">Filter by Genre</h3>
+          <button class="close_genre_drawer" style="background:transparent; border:none; cursor:pointer; padding:8px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--text-muted)">
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="genre_list_container" style="display:flex; flex-wrap:wrap; gap:10px;"></div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", drawerHTML);
+    const drawer = document.querySelector(".genre_drawer");
+    const overlay = document.querySelector(".genre_drawer_overlay");
+    const closeBtn = document.querySelector(".close_genre_drawer");
+    const container = document.querySelector(".genre_list_container");
+    genreOpener.addEventListener("click", async () => {
+      drawer.style.right = "0px";
+      overlay.style.display = "block";
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      // Fetch genres if not already loaded
+      if (container.innerHTML.trim() === "") {
+        await loadGenres();
       }
+    });
+    closeBtn.addEventListener("click", closeDrawer);
+    overlay.addEventListener("click", closeDrawer);
+    function closeDrawer() {
+      drawer.style.right = "-400px";
+      overlay.style.display = "none";
+    }
+    async function loadGenres() {
+      try {
+        const response = await fetch("/api/tv/genre");
+        const genres = await response.json();
 
-      const data = await response.json();
+        genres.forEach((gen) => {
+          const btn = document.createElement("button");
+          btn.textContent = gen.genre_name;
+          btn.style.cssText =
+            "padding:8px 16px; background:var(--button); border:1px solid var(--border); border-radius:20px; color:var(--text-muted); font-size:12px; cursor:pointer; transition:all 0.2s;";
+          btn.onmouseover = () => {
+            btn.style.borderColor = "var(--accent)";
+            btn.style.color = "var(--accent)";
+          };
+          btn.onmouseout = () => {
+            btn.style.borderColor = "var(--border)";
+            btn.style.color = "var(--text-muted)";
+          };
 
-      data.forEach((gen) => {
-        const genre = document.createElement("p");
-        genre.className = `genre`;
-        genre.textContent = gen.genre_name;
-        genre.dataset.genre_id = gen.genre_id;
+          btn.addEventListener("click", () => {
+            genre_displayer.textContent = gen.genre_name;
+            get_tv_by_genre(gen.genre_id);
+            closeDrawer();
+          });
 
-        genre_list.appendChild(genre);
-        genre.addEventListener("click", () => {
-          get_tv_by_genre(gen.genre_id);
+          container.appendChild(btn);
         });
-      });
-    } catch (error) {
-      console.log(
-        `error while fetching data from tvsection api of jikan : ${error}`,
-      );
+      } catch (error) {
+        console.error("Error loading genres:", error);
+      }
     }
   }
+
+  // async function fetch_tv_genre() {
+  //   const genre_list = document.querySelector(".genre_list");
+  //   genre_list.innerHTML = "";
+  //   try {
+  //     const response = await fetch(`/api/tv/genre`);
+
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+
+  //     const data = await response.json();
+
+  //     data.forEach((gen) => {
+  //       const genre = document.createElement("p");
+  //       genre.className = `genre`;
+  //       genre.textContent = gen.genre_name;
+  //       genre.dataset.genre_id = gen.genre_id;
+
+  //       genre_list.appendChild(genre);
+  //       genre.addEventListener("click", () => {
+  //         get_tv_by_genre(gen.genre_id);
+  //       });
+  //     });
+  //   } catch (error) {
+  //     console.log(
+  //       `error while fetching data from tvsection api of jikan : ${error}`,
+  //     );
+  //   }
+  // }
   special_category_tv();
   function special_category_tv() {
     const special_category = document.querySelectorAll(".special_category");
@@ -255,8 +327,8 @@ function tv_js() {
   }
 
   function get_tv_by_genre(genre_id) {
-    const card_grid = document.querySelector(".card_grid");
-    card_grid.innerHTML = "";
+    const tv_preview_grid = document.querySelector(".tv_preview_grid");
+    tv_preview_grid.innerHTML = "";
     let page_number = 1;
     let current_genre = genre_id;
 
@@ -304,7 +376,7 @@ function tv_js() {
 
         send_data.forEach((gen) => {
           const card = card_ui(gen);
-          card_grid.appendChild(card);
+          tv_preview_grid.appendChild(card);
         });
       } catch (error) {
         console.log(

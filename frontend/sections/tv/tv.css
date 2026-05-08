@@ -349,6 +349,8 @@
 
 .tv_filtering_genre_category_wrapper {
   margin: 20px 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .genre_opener {
@@ -358,12 +360,21 @@
   border: 1px solid var(--border-hovered);
   border-radius: var(--border-large);
   transition: all 0.25s ease-in;
+  margin: 10px 0;
 }
 
 .genre_opener:hover {
   background: var(--button-hovered);
   border-color: var(--border);
   cursor: pointer;
+}
+
+.genre_displayer {
+  width: max-content;
+  padding: var(--padding-medium) var(--padding-large);
+  border: 1px solid var(--border);
+  border-radius: var(--border-medium);
+  margin: 10px 0;
 }
 
 .tv_preview_wrapper {
@@ -392,13 +403,13 @@
 .tv_preview_grid {
   padding: var(--padding-enourmous);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 }
 
 .card {
-  /*aspect-ratio: 2/3;*/
-  /*min-width: 200px;*/
-  max-height: 300px;
+  aspect-ratio: 2/3;
+  max-height: none;
+  height: 280px;
   margin: 10px;
   border-radius: var(--border-large);
   overflow: hidden;
