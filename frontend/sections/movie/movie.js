@@ -265,11 +265,13 @@ function movie_js() {
   // }
   special_category_movie();
   function special_category_movie() {
-    const special_category = document.querySelectorAll(".special_category");
-    if (special_category.length === 0) {
+    const movie_filtering_special_category = document.querySelectorAll(
+      ".movie_filtering_special_category",
+    );
+    if (movie_filtering_special_category.length === 0) {
       return;
     }
-    special_category.forEach((sc) => {
+    movie_filtering_special_category.forEach((sc) => {
       sc.addEventListener("click", () => {
         const category = sc.textContent.trim().toLowerCase();
         get_special_category_movie(category);
@@ -399,6 +401,7 @@ function movie_js() {
     const card = document.createElement("a");
     card.className = `card`;
     const poster = document.createElement("img");
+    poster.className = "card_image";
     let src_url;
 
     if (content.poster_path) {

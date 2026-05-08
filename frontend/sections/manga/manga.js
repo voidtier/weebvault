@@ -54,12 +54,12 @@ function manga_js() {
       score.textContent = send_data.score;
       fav.textContent = formatNumber(send_data.favorites);
 
-      if (send_data.episodes === null) {
-        ep_or_du_symbol.textContent = "Duration";
-        ep_or_du.textContent = `${send_data.duration}`;
+      if (send_data.volumes === null) {
+        ep_or_du_symbol.textContent = "Chapters";
+        ep_or_du.textContent = `${send_data.chapters}`;
       } else {
-        ep_or_du_symbol.textContent = "Episodes";
-        ep_or_du.textContent = send_data.episodes;
+        ep_or_du_symbol.textContent = "Volumes";
+        ep_or_du.textContent = send_data.volumes;
       }
     } catch (error) {
       console.log(
@@ -255,11 +255,13 @@ function manga_js() {
 
   special_category_manga();
   function special_category_manga() {
-    const special_category = document.querySelectorAll(".special_category");
-    if (special_category.length === 0) {
+    const manga_filtering_special_category = document.querySelectorAll(
+      ".manga_filtering_special_category",
+    );
+    if (manga_filtering_special_category.length === 0) {
       return;
     }
-    special_category.forEach((sc) => {
+    manga_filtering_special_category.forEach((sc) => {
       sc.addEventListener("click", () => {
         const category = sc.textContent.trim().toLowerCase();
         get_special_category_manga(category);
@@ -388,6 +390,7 @@ function manga_js() {
     const card = document.createElement("a");
     card.className = `card`;
     const poster = document.createElement("img");
+    poster.className = "card_image";
     let src_url;
 
     if (content.images) {

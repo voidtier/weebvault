@@ -259,11 +259,13 @@ function tv_js() {
   // }
   special_category_tv();
   function special_category_tv() {
-    const special_category = document.querySelectorAll(".special_category");
-    if (special_category.length === 0) {
+    const tv_filtering_special_category = document.querySelectorAll(
+      ".tv_filtering_special_category",
+    );
+    if (tv_filtering_special_category.length === 0) {
       return;
     }
-    special_category.forEach((sc) => {
+    tv_filtering_special_category.forEach((sc) => {
       sc.addEventListener("click", () => {
         const category = sc.textContent.trim().toLowerCase();
         get_special_category_tv(category);
@@ -393,6 +395,7 @@ function tv_js() {
     const card = document.createElement("a");
     card.className = `card`;
     const poster = document.createElement("img");
+    poster.className = "card_image";
     let src_url;
 
     if (content.poster_path) {

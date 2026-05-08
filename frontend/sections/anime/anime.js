@@ -255,11 +255,13 @@ function anime_js() {
 
   special_category_anime();
   function special_category_anime() {
-    const special_category = document.querySelectorAll(".special_category");
-    if (special_category.length === 0) {
+    const anime_filtering_special_category = document.querySelectorAll(
+      ".anime_filtering_special_category",
+    );
+    if (anime_filtering_special_category.length === 0) {
       return;
     }
-    special_category.forEach((sc) => {
+    anime_filtering_special_category.forEach((sc) => {
       sc.addEventListener("click", () => {
         const category = sc.textContent.trim().toLowerCase();
         get_special_category_anime(category);
@@ -388,6 +390,7 @@ function anime_js() {
     const card = document.createElement("a");
     card.className = `card`;
     const poster = document.createElement("img");
+    poster.className = "card_image";
     let src_url;
 
     if (content.images) {

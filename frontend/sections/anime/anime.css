@@ -401,29 +401,29 @@
 .anime_preview_grid {
   padding: var(--padding-enourmous);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
 }
-
 .card {
-  /*aspect-ratio: 2/3;*/
-  /*min-width: 200px;*/
-  margin: 10px;
+  /*aspect-ratio: 2/3; - REMOVE THIS */
+  height: 260px;
+  margin: 0;
   border-radius: var(--border-large);
   overflow: hidden;
   box-shadow: var(--shadow), var(--shadow);
   transition: all 0.25s ease-in;
   filter: grayscale(1);
+  background: var(--surface-muted);
 }
-
 .card:hover {
   filter: grayscale(0);
   cursor: pointer;
 }
-
 .card_image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover; /* CHANGE FROM contain TO cover */
+  object-position: center top;
 }
 
 @keyframes blink {
