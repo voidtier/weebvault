@@ -315,6 +315,13 @@ function anime_js() {
         send_data.forEach((gen) => {
           const card = card_ui(gen);
           anime_preview_grid.appendChild(card);
+          card.addEventListener("click", (e) => {
+            e.preventDefault();
+            const id = card.dataset.anime_id;
+            const type = "anime";
+
+            window.location.href = `/details/${type}/${id}`;
+          });
         });
       } catch (error) {
         console.log(
