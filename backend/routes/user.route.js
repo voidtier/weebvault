@@ -1,16 +1,9 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const bcrypt = require("bcrypt");
-const jsonwebtoken = require("jsonwebtoken");
-const path = require("path");
-const authentify = require("../middlewares/authentication.middleware.js");
-const user = require("../models/user.model.js");
-
-const frontendPath = path.join(__dirname, "../../frontend");
-
-router.get("/", authentify, function (req, res) {
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
+import bcryptjs from "bcryptjs";
+import jsonwebtoken from "jsonwebtoken";
+import authentify from "../middlewares/authentication.middleware.js";
+import user from "../models/user.model.js";
 
 router.post("/signup", async function (req, res) {
   try {
@@ -18,7 +11,7 @@ router.post("/signup", async function (req, res) {
     // console.log(req.body);
     const { firstname, lastname, email, username, password } = req.body;
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcryptjs.hash(password, 10);
 
     const newUSer = new user({
       name: {
@@ -36,10 +29,6 @@ router.post("/signup", async function (req, res) {
   }
 });
 
-router.get("/signup", function (req, res) {
-  res.sendFile(path.join(frontendPath, "authentication/signup.html"));
-});
-
 router.post("/signin", async function (req, res) {
   // log this if you need
   // console.log(req.body);
@@ -51,7 +40,7 @@ router.post("/signin", async function (req, res) {
       return res.redirect("/signin?logerror=email or password is incorrect");
     }
 
-    const corretPassword = await bcrypt.compare(password, foundUser.password);
+    const corretPassword = await bcryptjs.compare(password, foundUser.password);
 
     if (!corretPassword) {
       return res.redirect("/signin?logerror=email or password is incorrect");
@@ -73,10 +62,6 @@ router.post("/signin", async function (req, res) {
   }
 });
 
-router.get("/signin", function (req, res) {
-  res.sendFile(path.join(frontendPath, "authentication/signin.html"));
-});
-
 router.get("/user", authentify, async function (req, res) {
   const userId = req.user._id || req.user.id;
   try {
@@ -93,28 +78,8 @@ router.get("/user", authentify, async function (req, res) {
   }
 });
 
-router.get("/signout", function (req, res) {
-  res.clearCookie("token");
-  res.redirect("/signin");
-});
+// router.get("/signout", function (req, res) {
+//   res.clearCookie("token");
+// });
 
-router.get("/home", authentify, function (req, res) {
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
-router.get("/add", authentify, function (req, res) {
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
-router.get("/anime", authentify, function (req, res) {
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
-router.get("/manga", authentify, function (req, res) {
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
-router.get("/movie", authentify, function (req, res) {
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
-router.get("/tv", authentify, function (req, res) {
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
-
-module.exports = router;
+export default router;

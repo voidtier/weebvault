@@ -1,6 +1,6 @@
-const app = require("./backend/app.js");
-const connectToDB = require("./backend/config/db.js");
-const dotenv = require("dotenv");
+import app from "./app.js";
+import connectToDB from "./config/db.js";
+import dotenv from "dotenv";
 dotenv.config();
 const activePort = process.env.PORT || "3000";
 async function startServer() {

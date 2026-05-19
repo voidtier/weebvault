@@ -1,7 +1,9 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const authentify = require("../middlewares/authentication.middleware.js");
-const { jikan_base_url } = require("../config/api.js");
+import authentify from "../middlewares/authentication.middleware.js";
+import { jikan_base_url } from "../config/api.js";
+
+const entity = "anime";
 
 const categories = {
   top: "",
@@ -16,15 +18,15 @@ const categories = {
   ova: "type=ova",
 };
 
-router.get("/genre", authentify, async function (req, res) {
-  const anime_genre_url = `${jikan_base_url}/genres/anime`;
+router.get("/genre", async function (req, res) {
+  const anime_url = `${jikan_base_url}/genres/anime`;
   try {
-    const response = await fetch(anime_genre_url);
+    const response = await fetch(anime_url);
 
     if (!response.ok) {
-      return res
-        .status(response.status)
-        .json({ message: "External API Error" });
+      return res.status(response.status).json({
+        message: `External API ${anime_url} Error : the anime_genre_list route's jikan api failed`,
+      });
     }
 
     const { data } = await response.json();
@@ -33,15 +35,20 @@ router.get("/genre", authentify, async function (req, res) {
       return {
         genre_name: gen.name,
         genre_id: gen.mal_id,
+        // genre_entity: "anime",
+        genre_entity: entity,
       };
     });
 
     res.json(send_data);
   } catch (error) {
     console.log(
-      `error while fetching data from anime_route_genre_list server side : ${error}`,
+      `error while fetching data from the anime_genre_list route's jikan api server side : ${error}`,
     );
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({
+      error:
+        "Internal Server Error the anime_genre_list route's jikan api failed",
+    });
   }
 });
 
@@ -70,6 +77,8 @@ router.get(
           mal_id,
           images,
           type,
+          // entity: "anime",
+          entity,
         };
       });
 
@@ -109,6 +118,7 @@ router.get("/:query/:page_number", authentify, async function (req, res) {
         mal_id,
         images,
         type,
+        entity,
       };
     });
 
@@ -116,6 +126,7 @@ router.get("/:query/:page_number", authentify, async function (req, res) {
       has_page,
       send_data,
       type,
+      entity,
     });
   } catch (error) {
     console.log(
@@ -125,7 +136,7 @@ router.get("/:query/:page_number", authentify, async function (req, res) {
   }
 });
 
-router.get("/trending", authentify, async function (req, res) {
+router.get("/trending", async function (req, res) {
   try {
     const anime_url = `${jikan_base_url}/top/anime`;
     const response = await fetch(anime_url);
@@ -171,6 +182,7 @@ router.get("/trending", authentify, async function (req, res) {
         licensors,
         studios,
         genres,
+        entity,
       } = ani;
       return {
         mal_id,
@@ -205,6 +217,7 @@ router.get("/trending", authentify, async function (req, res) {
         licensors,
         studios,
         genres,
+        entity,
       };
     });
 
@@ -212,10 +225,13 @@ router.get("/trending", authentify, async function (req, res) {
       data_array,
     });
   } catch (error) {
-    console.log(
-      `error while fetching data from anime_route_treanding server side : ${error}`,
-    );
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error(error);
+    console.log("from api/anime/trending route");
+
+    res.status(500).json({
+      message: error.message,
+      stack: error.stack,
+    });
   }
 });
 
@@ -264,6 +280,7 @@ router.get("/:anime_id", async function (req, res) {
       licensors,
       studios,
       genres,
+      entity,
     } = data;
 
     res.status(response.status).json({
@@ -299,6 +316,7 @@ router.get("/:anime_id", async function (req, res) {
       licensors,
       studios,
       genres,
+      entity,
     });
   } catch (error) {
     res.json({ error: error.message });
@@ -329,6 +347,7 @@ router.get("/:category/:page", authentify, async function (req, res) {
       mal_id,
       images,
       type,
+      entity,
     }));
 
     res.json({
@@ -341,4 +360,4 @@ router.get("/:category/:page", authentify, async function (req, res) {
   }
 });
 
-module.exports = router;
+export default router;

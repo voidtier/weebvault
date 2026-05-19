@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const authentify = require("../middlewares/authentication.middleware.js");
-const { tmdb_base_url } = require("../config/api.js");
+import authentify from "../middlewares/authentication.middleware.js";
+import { tmdb_base_url } from "../config/api.js";
 
 // 1. Mapping categories to TMDB TV endpoints (Consistent with movie route)
 const categories = {
@@ -13,13 +13,13 @@ const categories = {
 
 // 2. Get TV Genre List
 router.get("/genre", authentify, async function (req, res) {
-  const url = `${tmdb_base_url}/genre/tv/list?api_key=${process.env.TMDB_API_KEY}`;
+  const tv_url = `${tmdb_base_url}/genre/tv/list?api_key=${process.env.TMDB_API_KEY}`;
   try {
-    const response = await fetch(url);
+    const response = await fetch(tv_url);
     if (!response.ok)
-      return res
-        .status(response.status)
-        .json({ message: "External API Error" });
+      return res.status(response.status).json({
+        message: `External API ${tv_url} Error : the tv_genre_list route's jikan api failed`,
+      });
 
     const { genres } = await response.json();
     const send_data = genres.map((gen) => ({
@@ -29,8 +29,12 @@ router.get("/genre", authentify, async function (req, res) {
 
     res.json(send_data);
   } catch (error) {
-    console.error(`Error in tv_genre_list: ${error}`);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error(
+      `error while fetching data from the tv_genre_list route's jikan api server side : ${error}`,
+    );
+    res.status(500).json({
+      error: "Internal Server Error the tv_genre_list route's jikan api failed",
+    });
   }
 });
 
@@ -187,4 +191,4 @@ router.get("/:category/:page", authentify, async function (req, res) {
   }
 });
 
-module.exports = router;
+export default router;

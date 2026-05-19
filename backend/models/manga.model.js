@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const mangaSchema = new mongoose.Schema(
   {
@@ -36,4 +36,4 @@ const mangaSchema = new mongoose.Schema(
 
 const manga = mongoose.model("manga", mangaSchema);
 
-module.exports = manga;
+export default manga;

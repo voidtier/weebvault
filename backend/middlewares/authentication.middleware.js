@@ -1,18 +1,15 @@
-const jsonwebtoken = require("jsonwebtoken");
+import jsonwebtoken from "jsonwebtoken";
 
-function authentify(req, res, next) {
+export default function authentify(req, res, next) {
   const token = req.cookies.token;
-  // console.log("Token:", token);
-
   if (!token) {
-    return res.redirect("/signin");
+    return res.json("couldn't log in");
   }
   try {
     const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
-    return res.redirect("/signin");
+    return res.json("log in");
   }
 }
-module.exports = authentify;

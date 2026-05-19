@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const animeSchema = new mongoose.Schema(
   {
@@ -42,4 +42,4 @@ const animeSchema = new mongoose.Schema(
 
 const anime = mongoose.model("anime", animeSchema);
 
-module.exports = anime;
+export default anime;

@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const authentify = require("../middlewares/authentication.middleware.js");
-const { jikan_base_url } = require("../config/api.js");
+import authentify from "../middlewares/authentication.middleware.js";
+import { jikan_base_url } from "../config/api.js";
 
 const categories = {
   top: "",
@@ -16,14 +16,14 @@ const categories = {
 };
 
 router.get("/genre", authentify, async function (req, res) {
-  const manga_genre_url = `${jikan_base_url}/genres/manga`;
+  const manga_url = `${jikan_base_url}/genres/manga`;
   try {
-    const response = await fetch(manga_genre_url);
+    const response = await fetch(manga_url);
 
     if (!response.ok) {
-      return res
-        .status(response.status)
-        .json({ message: "External API Error" });
+      return res.status(response.status).json({
+        message: `External API ${manga_url} Error : the manga_genre_list route's jikan api failed`,
+      });
     }
 
     const { data } = await response.json();
@@ -38,9 +38,12 @@ router.get("/genre", authentify, async function (req, res) {
     res.json(send_data);
   } catch (error) {
     console.log(
-      `error while fetching data from manga_route_genre_list server side : ${error}`,
+      `error while fetching data from the manga_genre_list route's jikan api server side : ${error}`,
     );
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({
+      error:
+        "Internal Server Error the manga_genre_list route's jikan api failed",
+    });
   }
 });
 
@@ -316,4 +319,4 @@ router.get("/:category/:page", authentify, async function (req, res) {
   }
 });
 
-module.exports = router;
+export default router;

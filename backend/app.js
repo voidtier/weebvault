@@ -1,25 +1,23 @@
-const express = require("express");
-const cookieParser = require("cookie-parser");
-const userRouter = require("./routes/user.route.js");
-const sectionsRouter = require("./routes/sections.route.js");
-// const addRouter = require("./routes/add.route.js");
-const animeRouter = require("./routes/anime.route.js");
-const mangaRouter = require("./routes/manga.route.js");
-const movieRouter = require("./routes/movie.route.js");
-const tvRouter = require("./routes/tv.route.js");
-const path = require("path");
+import express from "express";
+import cookieParser from "cookie-parser";
+import userRouter from "./routes/user.route.js";
+// import addRouter from "./routes/add.route.js"
+import animeRouter from "./routes/anime.route.js";
+// import mangaRouter from "./routes/manga.route.js";
+// import movieRouter from "./routes/movie.route.js";
+// import tvRouter from "./routes/tv.route.js";
+import cors from "cors";
 
 const app = express();
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", userRouter);
-app.use("/api", sectionsRouter);
 // app.use("/api/add", addRouter);
 app.use("/api/anime", animeRouter);
-app.use("/api/manga", mangaRouter);
-app.use("/api/movie", movieRouter);
-app.use("/api/tv", tvRouter);
-app.use(express.static(path.join(__dirname, "../frontend")));
+// app.use("/api/manga", mangaRouter);
+// app.use("/api/movie", movieRouter);
+// app.use("/api/tv", tvRouter);
 
-module.exports = app;
+export default app;
