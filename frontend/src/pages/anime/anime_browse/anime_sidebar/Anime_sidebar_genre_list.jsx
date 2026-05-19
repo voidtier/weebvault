@@ -39,6 +39,7 @@ export default function Anime_sidebar_genre_list({ genre_category }) {
             genre_category({
               fetch_id: gen.genre_id,
               fetch_category: "genre",
+              special_name: "",
             });
           }}
           className="

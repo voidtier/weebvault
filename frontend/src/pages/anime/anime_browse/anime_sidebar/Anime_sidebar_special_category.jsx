@@ -15,6 +15,7 @@ export default function Anime_sidebar_special_category({ special_category }) {
     "Finished",
     "Upcoming",
   ]);
+
   return (
     <>
       <div className=" text-gray-500 my-2.5">
@@ -24,8 +25,9 @@ export default function Anime_sidebar_special_category({ special_category }) {
               key={index}
               onClick={() => {
                 special_category({
-                  special_name: sc.toLowerCase().trim(),
+                  fetch_id: "",
                   fetch_category: "special",
+                  special_name: sc.toLowerCase().trim(),
                 });
               }}
               className="text-[14px] border-b border-gray-700 hover:bg-gray-600 duration-200"
