@@ -31,7 +31,7 @@ export default function Anime_preview({ changed_category }) {
       async function genre_fetch() {
         try {
           const response = await fetch(
-            `http://localhost:4000/api/anime/${changed_category.fetch_category}/${page_number}`,
+            `http://localhost:4000/api/anime/${changed_category.special_name}/${page_number}`,
           );
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -47,11 +47,20 @@ export default function Anime_preview({ changed_category }) {
       genre_fetch();
     }
   }, [changed_category]);
+
+  if (fetched_data.length === 0) {
+    return (
+      <>
+        <h1 className="text-4xl text-gray-300">Please wait</h1>
+      </>
+    );
+  }
+
   return (
     <>
       <section className="max-w-[85%] h-full p-5">
         <Anime_preview_filter_list />
-        <Anime_preview_card_grid card_data={[fetched_data]} />
+        <Anime_preview_card_grid card_data={fetched_data} />
       </section>
     </>
   );

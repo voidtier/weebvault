@@ -36,8 +36,10 @@ export default function Anime_sidebar_genre_list({ genre_category }) {
           key={gen.genre_id}
           id={gen.genre_id}
           onClick={() => {
-            ((genre_category.fetch_id = gen.genre_id),
-              (genre_category.fetch_category = "genre"));
+            genre_category({
+              fetch_id: gen.genre_id,
+              fetch_category: "genre",
+            });
           }}
           className="
             px-2.5 py-1

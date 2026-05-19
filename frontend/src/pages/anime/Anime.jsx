@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Anime_landing_section from "./anime_landing/Anime_landing_page";
-import Anime_rest from "./Anime_rest";
+import Anime_browse_page from "./anime_browse/Anime_browse_page.jsx";
 function Anime() {
   useEffect(() => {
     async function fetch_data() {
@@ -15,13 +15,13 @@ function Anime() {
         console.error(error);
       }
     }
-    // fetch_data();
+    fetch_data();
   });
   return (
     <>
       <section className="w-full min-h-screen bg-mist-950" id="anime">
         <Anime_landing_section />
-        <Anime_rest />
+        <Anime_browse_page />
       </section>
     </>
   );
