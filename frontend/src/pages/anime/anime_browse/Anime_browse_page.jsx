@@ -2,7 +2,7 @@ import { useState } from "react";
 import Anime_preview from "./anime_preview/Anime_preview";
 import Anime_sidebar from "./anime_sidebar/Anime_sidebar";
 
-export default function Anime_rest() {
+export default function Anime_browse_page() {
   const [fetch_info, set_fetch_info] = useState({
     fetch_id: "",
     fetch_category: "genre",

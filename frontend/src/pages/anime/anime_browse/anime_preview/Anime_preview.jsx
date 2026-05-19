@@ -31,7 +31,7 @@ export default function Anime_preview({ changed_category }) {
       async function genre_fetch() {
         try {
           const response = await fetch(
-            `http://localhost:4000/api/anime/${changed_category.special_name}/${page_number}`,
+            `http://localhost:4000/api/anime/category/${changed_category.special_name}/${page_number}`,
           );
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

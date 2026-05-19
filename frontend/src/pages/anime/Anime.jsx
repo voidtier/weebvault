@@ -16,7 +16,7 @@ function Anime() {
       }
     }
     fetch_data();
-  });
+  }, []);
   return (
     <>
       <section className="w-full min-h-screen bg-mist-950" id="anime">

@@ -95,46 +95,50 @@ router.get(
   },
 );
 
-router.get("/:query/:page_number", authentify, async function (req, res) {
-  try {
-    const query = req.params.query;
-    const page_number = req.params.page_number;
-    const type = "anime";
-    const anime_url = `${jikan_base_url}/anime?q=${query}&page=${page_number}`;
-    const response = await fetch(anime_url);
+router.get(
+  "/search/:query/:page_number",
+  authentify,
+  async function (req, res) {
+    try {
+      const query = req.params.query;
+      const page_number = req.params.page_number;
+      const type = "anime";
+      const anime_url = `${jikan_base_url}/anime?q=${query}&page=${page_number}`;
+      const response = await fetch(anime_url);
 
-    if (!response.ok) {
-      return res
-        .status(response.status)
-        .json({ message: "External API Error" });
-    }
+      if (!response.ok) {
+        return res
+          .status(response.status)
+          .json({ message: "External API Error" });
+      }
 
-    const { data, pagination } = await response.json();
-    const has_page = pagination.has_next_page || false;
+      const { data, pagination } = await response.json();
+      const has_page = pagination.has_next_page || false;
 
-    const send_data = data.map((gen) => {
-      const { mal_id, images, type } = gen;
-      return {
-        mal_id,
-        images,
+      const send_data = data.map((gen) => {
+        const { mal_id, images, type } = gen;
+        return {
+          mal_id,
+          images,
+          type,
+          entity,
+        };
+      });
+
+      res.json({
+        has_page,
+        send_data,
         type,
         entity,
-      };
-    });
-
-    res.json({
-      has_page,
-      send_data,
-      type,
-      entity,
-    });
-  } catch (error) {
-    console.log(
-      `error while fetching data from anime_route_search server side : ${error}`,
-    );
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+      });
+    } catch (error) {
+      console.log(
+        `error while fetching data from anime_route_search server side : ${error}`,
+      );
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
+);
 
 router.get("/trending", async function (req, res) {
   try {
@@ -235,7 +239,7 @@ router.get("/trending", async function (req, res) {
   }
 });
 
-router.get("/:anime_id", async function (req, res) {
+router.get("/details/:anime_id", async function (req, res) {
   try {
     const anime_id = Number(req.params.anime_id);
     if (isNaN(anime_id)) {
@@ -323,7 +327,7 @@ router.get("/:anime_id", async function (req, res) {
   }
 });
 
-router.get("/:category/:page", authentify, async function (req, res) {
+router.get("/category/:category/:page", authentify, async function (req, res) {
   const { category, page } = req.params;
   const filter_category = categories[category];
 
