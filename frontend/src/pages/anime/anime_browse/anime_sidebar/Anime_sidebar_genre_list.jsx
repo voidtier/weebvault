@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function Anime_sidebar_genre_list() {
+export default function Anime_sidebar_genre_list({ genre_category }) {
   const [genre, set_genre] = useState([]);
 
   useEffect(() => {
@@ -35,6 +35,10 @@ export default function Anime_sidebar_genre_list() {
         <div
           key={gen.genre_id}
           id={gen.genre_id}
+          onClick={() => {
+            ((genre_category.fetch_id = gen.genre_id),
+              (genre_category.fetch_category = "genre"));
+          }}
           className="
             px-2.5 py-1
             rounded-full
