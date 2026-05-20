@@ -1,8 +1,9 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import userRouter from "./routes/user.route.js";
+import auth_router from "./features/auth/auth.route.js";
+// import userRouter from "./routes/user.route.js";
 // import addRouter from "./routes/add.route.js"
-import animeRouter from "./routes/anime.route.js";
+import animeRouter from "./features/anime/anime.route.js";
 // import mangaRouter from "./routes/manga.route.js";
 // import movieRouter from "./routes/movie.route.js";
 // import tvRouter from "./routes/tv.route.js";
@@ -13,7 +14,8 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/", userRouter);
+app.use("/api/auth", auth_router);
+// app.use("/", userRouter);
 // app.use("/api/add", addRouter);
 app.use("/api/anime", animeRouter);
 // app.use("/api/manga", mangaRouter);

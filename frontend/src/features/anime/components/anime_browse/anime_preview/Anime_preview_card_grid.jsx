@@ -14,7 +14,7 @@ export default function Anime_preview_card_grid({ card_data }) {
         {card_data.map((card) => {
           return (
             <Card
-              className="grayscale-100 hover:grayscale-0 cursor-pointer"
+              className="grayscale-100 hover:grayscale-0 duration-300 cursor-pointer"
               key={card.mal_id}
               id={card.mal_id}
               image_src={card.images.webp.large_image_url}

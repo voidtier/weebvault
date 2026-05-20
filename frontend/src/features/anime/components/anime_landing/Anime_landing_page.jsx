@@ -14,9 +14,9 @@ export default function Anime_landing_section() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json();
+        const { data } = await response.json();
         // console.log(data);
-        set_landing_data(data.data_array);
+        set_landing_data(data);
         // console.log(data.data_array);
       } catch (error) {
         console.log(`error  : ${error}`);
